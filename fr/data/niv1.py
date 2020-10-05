@@ -9,4 +9,4 @@ class Film():
         Film.nb += 1
 
     def __str__(self):
-        return (f"Film n°{self.nb}: {self.titre} , seance de {self.seance} ({self.places} de disponible) ")
+        return (f"Film n°{self.nb}: {self.titre} , seance de {self.seance}  de disponible) ")

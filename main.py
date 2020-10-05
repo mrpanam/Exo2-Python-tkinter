@@ -20,12 +20,13 @@ f4 = Film("Pulp Fiction", "15h30", 80)
 films = [f1, f2, f3, f4]
 
 
-def click_btn(film_id):
-    print("vous avez reserver 1 place pour ",film_id)
+def click_btn(film_id,place):
+    print("vous avez reserver 1 place pour ", film_id)
     if film_id.places > 1:
         film_id.places -= 1
-        #print(f"vos {nbplace} places sont réservées")
+        # print(f"vos {nbplace} places sont réservées")
         print(f"il reste {film_id.places} places pour ce film ")
+        place.set(film_id.places)
     else:
         print("il ne reste plus de places")
 
@@ -33,18 +34,21 @@ def click_btn(film_id):
 for i in films:
     print(i)
 
-    places_var=StringVar()
+    places_var = StringVar()
     places_var.set(i.places)
 
-    titre_label = Label(fenetre, text= i , textvariable=places_var,bg="#FFE4B5")
-    titre_label.grid(row=i.nb,column=0)
+    titre_label = Label(fenetre, text=i, bg="#FFE4B5")
+    titre_label.grid(row=i.nb, column=0)
 
-    bouton = Button(fenetre,text="reserver",command=lambda num = i: click_btn(num))
-    bouton.grid(row=i.nb,column=1)
+    titre_label = Label(fenetre, textvariable=places_var, bg="#FFE4B5")
+    titre_label.grid(row=i.nb, column=1)
 
+    bouton = Button(fenetre, text="reserver",
+                    command=lambda num=i, places=places_var: click_btn(num, places))
+    bouton.grid(row=i.nb, column=2)
 
-#film_id = int(input("Choisir un film \n"))
-#nbplace = int(input("nombre de place désirées?\n"))
+# film_id = int(input("Choisir un film \n"))
+# nbplace = int(input("nombre de place désirées?\n"))
 
 
 fenetre.mainloop()
